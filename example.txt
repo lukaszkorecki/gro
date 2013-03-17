@@ -1,0 +1,4 @@
+foo 20
+yo 40
+baz 10
+qux 20

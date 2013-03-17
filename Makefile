@@ -1,8 +1,6 @@
-gopath=.
-gobin=$(gopath)/bin
-main = src/main.go
+main = gro.go
 build:
-	env GOPATH=$(gopath) GOBIN=$(gobin) go build $(main)
+	go build -v $(main)
 
 edit:
 	env GOPATH=$(gopath) vim $*
