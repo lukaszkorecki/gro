@@ -1,6 +1,5 @@
-main = gro.go
+GOPATH=`pwd`
+main = src/gro.go
 build:
-	go build -v $(main)
-
-edit:
-	env GOPATH=$(gopath) vim $*
+	@echo Building in $(GOPATH)
+	@env GOPATH=$(GOPATH) go build -v $(main)
