@@ -5,6 +5,7 @@ import (
 	"os"
 	"log"
 	"fileReader"
+	"linePrinter"
 )
 
 // FIXME a bit more info perhaps?
@@ -24,5 +25,6 @@ func main() {
 		filename = os.Args[1]
 	}
 
-	fileReader.OpenAndRead(filename)
+	lines := fileReader.CreateListFromFile(filename)
+	linePrinter.Simple(lines)
 }
