@@ -9,8 +9,8 @@ import (
 )
 
 type Line struct {
-	key, value string
-	num_value float64
+	Key, Value string
+	NumValue float64
 }
 
 
@@ -29,63 +29,49 @@ func openFile(filename string) *os.File {
 	return file
 }
 
-func readFile(file *bufio.Reader) {
-	var (
-		err  error = nil
-		line []byte
-	)
-
-	for err == nil {
-		line, _, err = file.ReadLine()
-		s := string(line)
-		if len(s) > 0 {
-			log.Print(s)
-		}
-	}
-}
-
-func OpenAndRead(filename string) {
-	file := openFile(filename)
-	reader := bufio.NewReader(file)
-	readFile(reader)
-}
-
-func ExtractLines(line string) Line {
+func extractLineData(line string) Line {
 	set := strings.Split(line, " ")
 	key, val := set[0], set[1]
 	num_val, _ := strconv.ParseFloat(val, 32)
 
 	l := new(Line)
-	l.key = key
-	l.value = val
-	l.num_value = num_val
+	l.Key = key
+	l.Value = val
+	l.NumValue = num_val
 
 	return *l
 }
 
-func lineList(file *bufio.Reader) []Line {
+func lineList(file *bufio.Reader) []string {
 	var (
 		err error = nil
 		line []byte
-		lines []Line
+		lines []string
 	)
 
 	for err == nil {
 		line, _, err = file.ReadLine()
 		if len(line) > 0 {
-			l := ExtractLines(string(line))
-			lines = append(lines, l)
-
+			lines = append(lines, string(line))
 		}
 	}
 
 	return lines
-
 }
 
-func CreateList(filename string) []Line {
+func convertLines(lines []string) []Line {
+	var converted []Line
+	for _, line := range lines {
+		l := extractLineData(string(line))
+		converted = append(converted, l)
+	}
+	return converted
+}
+
+func CreateListFromFile(filename string) []Line {
 	file := openFile(filename)
 	reader := bufio.NewReader(file)
 	list := lineList(reader)
-	return list
+	converted := convertLines(list)
+	return converted
 }
