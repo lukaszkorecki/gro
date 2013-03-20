@@ -1,9 +1,11 @@
 GOPATH=`pwd`
 main = src/gro.go
-test_packages="fileReader"
+# find all package names in src and add them to list
+test_packages=`find ./src/ -type d | sed 's/^.*src.*\///'`
 
 test:
-	@env GOPATH=$(GOPATH) go test -v $(test_packages)
+	echo $(test_packages)
+	env GOPATH=$(GOPATH) go test -v $(test_packages)
 
 build:
 	@echo Building in $(GOPATH)
