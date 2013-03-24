@@ -26,5 +26,5 @@ func main() {
 	}
 
 	lines := fileReader.CreateListFromFile(filename)
-	linePrinter.Simple(lines)
+	linePrinter.BarGraph(lines, 80)
 }
