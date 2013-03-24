@@ -4,9 +4,8 @@ main = src/gro.go
 test_packages=`find ./src/ -type d | sed 's/^.*src.*\///'`
 
 test:
-	echo $(test_packages)
 	env GOPATH=$(GOPATH) go test -v $(test_packages)
 
-build:
+build: test
 	@echo Building in $(GOPATH)
 	@env GOPATH=$(GOPATH) go build -v $(main)
