@@ -33,8 +33,8 @@ func TestFileReading(t *testing.T) {
 	exp = append(exp, Line{"qux", "20", 20.0})
 
 	data := CreateListFromFile(fname)
-	for i := len(exp) ; i > 0 ; i-- {
-		if data[i-1] == exp[i-1] {
+	for i, item := range  exp {
+		if data[i] == item {
 			acc++
 		}
 	}

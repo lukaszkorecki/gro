@@ -37,7 +37,7 @@ func extractLineData(line string) Line {
 	l := new(Line)
 	l.Key = key
 	l.Value = val
-	l.NumValue = num_val
+	l.NumValue = float64(num_val)
 
 	return *l
 }
